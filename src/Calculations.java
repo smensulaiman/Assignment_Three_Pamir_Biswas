@@ -103,6 +103,17 @@ public class Calculations {
         System.out.println(new SimpleDateFormat("MM/dd/yyyy").format(sortedDateByClosingValues[sortedDateByClosingValues.length - 1]) + " date had the highest closing value");
         System.out.println(new SimpleDateFormat("MM/dd/yyyy").format(sortedDateByOpeningValues[0]) + " date had the lowest opening value");
         System.out.println(new SimpleDateFormat("MM/dd/yyyy").format(sortedDateByClosingValues[0]) + " date had the lowest closing value");
+    
+        System.out.println("\nTop ten dates with the highest closing value\n");
+        
+        for(int i = 0 ; i<10 ; i++){
+            System.out.println(new SimpleDateFormat("MM/dd/yyyy").format(sortedDateByClosingValues[10-i]));
+        }
+        System.out.println("\nTop ten dates with the lowest closing value\n");
+        
+        for(int i = 0 ; i<10 ; i++){
+            System.out.println(new SimpleDateFormat("MM/dd/yyyy").format(sortedDateByClosingValues[i]));
+        }
     }
 
     public Date[] sortData(float[] array) {
@@ -131,10 +142,8 @@ public class Calculations {
     }
 
     public void createFile() {
-
         File file = new File("C:\\temp\\updateMSC.csv");
         Path filePath = Paths.get(file.getAbsolutePath());
-
         if (Files.exists(filePath)) {
             System.out.println(file.toString() + " already exists");
         } else {
@@ -144,9 +153,7 @@ public class Calculations {
                 e.printStackTrace();
             }
         }
-
         String strData = "Date,Open,High,Low,Close,Adj Close,Volume,Difference \n";
-
         for (int index = 0; index < dateArray.length; index++) {
             strData += new SimpleDateFormat("MM/dd/yyyy").format(dateArray[index]);
             for (int row = 0; row < dataArray[index].length; row++) {
@@ -155,7 +162,6 @@ public class Calculations {
             strData += "," + (dataArray[index][0] - dataArray[index][3]);
             strData += "\n";
         }
-
         try {
             OutputStream output = new BufferedOutputStream(Files.newOutputStream(filePath));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
